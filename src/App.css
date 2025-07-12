@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+  padding: 2rem;
+}
+
+.pokedex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  width: 150px;
+  padding: 1rem;
+}
+
+.card img {
+  width: 100px;
+  height: 100px;
+}
