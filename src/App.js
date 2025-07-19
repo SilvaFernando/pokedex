@@ -35,25 +35,23 @@ function App() {
   const [search, setSearch] = useState("");
   const [loadingList, setLoadingList] = useState(false);
   const [evolutions, setEvolutions] = useState([]);
-  const [accessibleClose, setAccessibleClose] = useState(false);
-
   const totalPages = Math.ceil(TOTAL_POKEMONS / POKEMONS_PER_PAGE);
 
   // Acessibilidade: fecha modal com ESC e ENTER
   useEffect(() => {
-    if (modalOpen && !accessibleClose) {
-      const handleKeyDown = (e) => {
-        if (e.key === "Escape") handleModalClose();
-        if (e.key === "Enter" && document.activeElement.id === "close-modal") handleModalClose();
-      };
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") handleModalClose();
+      if (e.key === "Enter" && document.activeElement.id === "close-modal") handleModalClose();
+    };
+
+    if (modalOpen) {
       window.addEventListener("keydown", handleKeyDown);
-      setAccessibleClose(true);
-      return () => {
-        window.removeEventListener("keydown", handleKeyDown);
-        setAccessibleClose(false);
-      };
     }
-  }, [modalOpen, accessibleClose]);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [modalOpen]);
 
   useEffect(() => {
     async function fetchPageData() {
@@ -137,7 +135,6 @@ function App() {
     setModalOpen(false);
     setSelectedPokemon(null);
     setEvolutions([]);
-    setAccessibleClose(false);
   };
 
   // Busca (apenas na página atual)
